@@ -42,7 +42,7 @@ RUN sudo apt-get install -y \
     libspdlog-dev
 
 # Clone and build Verilator from source as to have the latest version
-ARG VERILATOR_VERSION=v5.040
+ARG VERILATOR_VERSION=v5.042
 RUN git clone https://github.com/verilator/verilator.git /home/${USER}/verilator && \
     cd /home/${USER}/verilator && \
     git checkout ${VERILATOR_VERSION} && \
