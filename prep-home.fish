@@ -13,7 +13,7 @@ or return
 
 echo "Building home for the first time..."
 
-curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
 fish_add_path -U "$HOME/.local/bin"
 
 # We do not need to install Zed when building a base image for CI use
