@@ -6,18 +6,18 @@ RUN apt-get update && \
     apt-get install -y sudo weston mesa-vulkan-drivers openssh-client \
     git iputils-ping vulkan-tools curl iproute2
 
-# Install the fish shell for a nicer experience
-ARG USER=user
-RUN apt-get install -y fish
-ENV SHELL=fish
-RUN chsh -s /usr/bin/fish ${USER}
-
 # Setup non-root user with a password for added security
+ARG USER=user
 RUN usermod -l ${USER} ubuntu -m -d /home/${USER} && \
     echo passwd -d ${USER} && \
     echo "${USER} ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 WORKDIR /home/${USER}
 ENV HOME=/home/${USER}
+
+# Install the fish shell for a nicer experience
+RUN apt-get install -y fish
+ENV SHELL=fish
+RUN chsh -s /usr/bin/fish ${USER}
 
 # Avoid interactive prompts during build
 ENV DEBIAN_FRONTEND=noninteractive
