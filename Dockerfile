@@ -22,15 +22,6 @@ RUN chsh -s /usr/bin/fish ${USER}
 # Avoid interactive prompts during build
 ENV DEBIAN_FRONTEND=noninteractive
 
-# Setup tools installed into the home dir
-COPY prep-home.fish /prep-home.fish
-RUN chmod +x /prep-home.fish && chown ${USER} /prep-home.fish
-USER ${USER}
-RUN /prep-home.fish --ci
-
-# Trunk.io simplifies automated code quality control
-RUN curl https://get.trunk.io -fsSL | bash
-
 # Install dependencies (mostly for verilator)
 RUN sudo apt-get install -y \
     help2man perl python3 make autoconf g++ flex bison ccache gdb \
@@ -40,6 +31,15 @@ RUN sudo apt-get install -y \
     clang clang-format \
     gtkwave cmake ninja-build \
     libspdlog-dev
+
+# Setup tools installed into the home dir
+COPY prep-home.fish /prep-home.fish
+RUN chmod +x /prep-home.fish && chown ${USER} /prep-home.fish
+USER ${USER}
+RUN /prep-home.fish --ci
+
+# Trunk.io simplifies automated code quality control
+RUN curl https://get.trunk.io -fsSL | bash
 
 # Install Verible for a better development experience
 ARG VERIBLE_VERSION=v0.0-4023-gc1271a00
