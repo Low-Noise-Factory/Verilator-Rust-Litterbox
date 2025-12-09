@@ -14,6 +14,7 @@ or return
 echo "Building home for the first time..."
 
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+source "$HOME/.cargo/env.fish"
 fish_add_path -U "$HOME/.local/bin"
 
 # Nextest is very useful for advanced testing
