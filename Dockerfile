@@ -41,6 +41,13 @@ RUN sudo apt-get install -y \
     gtkwave cmake ninja-build \
     libspdlog-dev
 
+# Install Verible for a better development experience
+ARG VERIBLE_VERSION=v0.0-4023-gc1271a00
+RUN curl -L -o verible.tar.gz https://github.com/chipsalliance/verible/releases/download/${VERIBLE_VERSION}/verible-${VERIBLE_VERSION}-linux-static-x86_64.tar.gz
+RUN tar -xzf verible.tar.gz
+RUN sudo mv verible-${VERIBLE_VERSION}/bin/* /usr/local/bin/
+RUN rm -rf verible.tar.gz verible-${VERIBLE_VERSION}
+
 # Clone and build Verilator from source as to have the latest version
 ARG VERILATOR_VERSION=v5.042
 RUN git clone https://github.com/verilator/verilator.git /home/${USER}/verilator && \
