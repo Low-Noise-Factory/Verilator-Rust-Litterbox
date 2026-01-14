@@ -4,7 +4,8 @@ FROM debian:latest
 # Setup base system (we install weston to easily get all the Wayland deps)
 RUN apt-get update && \
     apt-get install -y sudo weston mesa-vulkan-drivers openssh-client \
-    git iputils-ping vulkan-tools curl iproute2 firefox-esr fonts-noto
+    git iputils-ping vulkan-tools curl iproute2 firefox-esr fonts-noto \
+    xdg-utils gh
 
 # Setup non-root user with a password for added security
 ARG USER=user
