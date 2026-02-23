@@ -20,9 +20,17 @@ fish_add_path -U "$HOME/.local/bin"
 # Nextest is very useful for advanced testing
 cargo install cargo-nextest --locked
 
+# Install pnpm since it works better than npm
+curl -fsSL https://get.pnpm.io/install.sh | sh -
+source /home/user/.config/fish/config.fish
+
+# Install a package that helps check for updates
+pnpm add -g npm-check-updates
+
 # We do not need to install Zed when building a base image for CI use
 if not set -ql _flag_ci
     curl -f https://zed.dev/install.sh | sh
+    fish_add_path -U "$HOME/.local/bin"
 end
 
 # Create the marker file to prevent re-running
