@@ -43,14 +43,14 @@ RUN /prep-home.fish --ci
 RUN curl https://get.trunk.io -fsSL | bash
 
 # Install Verible for a better development experience
-ARG VERIBLE_VERSION=v0.0-4023-gc1271a00
+ARG VERIBLE_VERSION=v0.0-4051-g9fdb4057
 RUN curl -L -o verible.tar.gz https://github.com/chipsalliance/verible/releases/download/${VERIBLE_VERSION}/verible-${VERIBLE_VERSION}-linux-static-x86_64.tar.gz
 RUN tar -xzf verible.tar.gz
 RUN sudo mv verible-${VERIBLE_VERSION}/bin/* /usr/local/bin/
 RUN rm -rf verible.tar.gz verible-${VERIBLE_VERSION}
 
 # Clone and build Verilator from source as to have the latest version
-ARG VERILATOR_VERSION=v5.042
+ARG VERILATOR_VERSION=v5.044
 RUN git clone https://github.com/verilator/verilator.git /home/${USER}/verilator && \
     cd /home/${USER}/verilator && \
     git checkout ${VERILATOR_VERSION} && \
@@ -59,6 +59,10 @@ RUN git clone https://github.com/verilator/verilator.git /home/${USER}/verilator
     make -j$(nproc) && \
     sudo make install && \
     rm -rf /home/${USER}/verilator
+
+# Install a newer version of Node than ships with Debian
+RUN curl -fsSL https://deb.nodesource.com/setup_24.x | sudo -E bash -
+RUN sudo apt-get install -y nodejs
 
 # Reset to default
 ENV DEBIAN_FRONTEND=dialog
