@@ -24,12 +24,6 @@ cargo install cargo-nextest --locked
 curl -fsSL https://get.pnpm.io/install.sh | sh -
 source /home/user/.config/fish/config.fish
 
-# Install a package that helps check for updates
-pnpm add -g npm-check-updates
-
-# Install a cspell globally for spell checking
-pnpm add -g cspell@latest
-
 # We do not need to install Zed when building a base image for CI use
 if not set -ql _flag_ci
     curl -f https://zed.dev/install.sh | sh
