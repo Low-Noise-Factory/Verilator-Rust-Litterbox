@@ -20,7 +20,13 @@ fish_add_path -U "$HOME/.local/bin"
 # Nextest is very useful for advanced testing
 cargo install cargo-nextest --locked
 
-# Install pnpm since it works better than npm
+# We use flip-link to make our fimrware more robust
+cargo install flip-link --locked
+
+# We use probe-rs to flash MCU firmware and debug
+cargo install probe-rs-tools --locked
+
+# We use pnpm since it works better than npm
 curl -fsSL https://get.pnpm.io/install.sh | sh -
 source /home/user/.config/fish/config.fish
 
