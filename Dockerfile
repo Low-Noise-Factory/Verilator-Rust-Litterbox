@@ -5,7 +5,7 @@ FROM debian:latest
 RUN apt-get update && \
     apt-get install -y sudo weston mesa-vulkan-drivers openssh-client \
     git iputils-ping vulkan-tools curl iproute2 firefox-esr fonts-noto \
-    xdg-utils gh rsync libnss3
+    xdg-utils gh rsync libnss3 libudev-dev
 
 # Setup non-root user with a password for added security
 ARG USER=user
