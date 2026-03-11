@@ -31,16 +31,13 @@ RUN sudo apt-get install -y \
     zlib1g zlib1g-dev \
     clang clang-format \
     gtkwave cmake ninja-build \
-    libspdlog-dev
+    libspdlog-dev xxd signify-openbsd
 
 # Setup tools installed into the home dir
 COPY prep-home.fish /prep-home.fish
 RUN chmod +x /prep-home.fish && chown ${USER} /prep-home.fish
 USER ${USER}
 RUN /prep-home.fish --ci
-
-# Trunk.io simplifies automated code quality control
-RUN curl https://get.trunk.io -fsSL | bash
 
 # Install Verible for a better development experience
 ARG VERIBLE_VERSION=v0.0-4051-g9fdb4057
