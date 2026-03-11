@@ -26,6 +26,9 @@ cargo install flip-link --locked
 # We use probe-rs to flash MCU firmware and debug
 cargo install probe-rs-tools --locked --features remote
 
+# We use binutils to creat update binaries
+cargo install cargo-binutils --locked
+
 # We use pnpm since it works better than npm
 curl -fsSL https://get.pnpm.io/install.sh | sh -
 source /home/user/.config/fish/config.fish
