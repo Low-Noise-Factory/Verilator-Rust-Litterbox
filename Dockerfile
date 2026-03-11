@@ -64,5 +64,8 @@ RUN sudo apt-get install -y nodejs
 # Reset to default
 ENV DEBIAN_FRONTEND=dialog
 
+# Set LANG to enable UTF-8 support
+ENV LANG=en_US.UTF-8
+
 # Enter the fish shell by default
 CMD ["fish", "/prep-home.fish"]
