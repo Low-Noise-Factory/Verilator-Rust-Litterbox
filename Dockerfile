@@ -8,12 +8,8 @@ RUN apt-get update && \
     xdg-utils gh rsync libnss3 libudev-dev
 
 # Setup non-root user for added security
-# (NB Litterbox assumes we do this step)
 ARG USER=user
-ARG UID=1000
-ARG GID=1000
-RUN groupadd -g ${GID} ${USER} || true
-RUN useradd -m ${USER} -u ${UID} -g ${GID}
+RUN useradd -m ${USER}
 WORKDIR /home/${USER}
 ENV HOME=/home/${USER}
 
