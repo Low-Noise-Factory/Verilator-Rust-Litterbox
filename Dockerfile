@@ -48,11 +48,11 @@ RUN git clone https://github.com/verilator/verilator.git /home/${USER}/verilator
     autoconf && \
     ./configure && \
     make -j$(nproc) && \
-    sudo make install && \
+    make install && \
     rm -rf /home/${USER}/verilator
 
 # Install a newer version of Node than ships with Debian
-RUN curl -fsSL https://deb.nodesource.com/setup_24.x | sudo -E bash -
+RUN curl -fsSL https://deb.nodesource.com/setup_24.x | bash -
 RUN apt-get install -y nodejs
 
 # Set LANG to enable UTF-8 support
