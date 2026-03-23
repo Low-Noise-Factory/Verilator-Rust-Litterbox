@@ -7,11 +7,13 @@ RUN apt-get update && \
     git iputils-ping vulkan-tools curl iproute2 firefox-esr fonts-noto \
     xdg-utils gh rsync libnss3 libudev-dev
 
-# Setup non-root user with a password for added security
+# Setup non-root user for added security
+# (NB Litterbox assumes we do this step)
 ARG USER=user
-RUN useradd -m $USER && \
-    echo passwd -d ${USER} && \
-    echo "${USER} ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
+ARG UID=1000
+ARG GID=1000
+RUN groupadd -g ${GID} ${USER} || true
+RUN useradd -m ${USER} -u ${UID} -g ${GID}
 WORKDIR /home/${USER}
 ENV HOME=/home/${USER}
 
@@ -20,11 +22,8 @@ RUN apt-get install -y fish
 ENV SHELL=fish
 RUN chsh -s /usr/bin/fish ${USER}
 
-# Avoid interactive prompts during build
-ENV DEBIAN_FRONTEND=noninteractive
-
 # Install dependencies (mostly for verilator)
-RUN sudo apt-get install -y \
+RUN apt-get install -y \
     help2man perl python3 make autoconf g++ flex bison ccache gdb \
     libgoogle-perftools-dev numactl perl-doc \
     libfl2 libfl-dev pkg-config libssl-dev libclang-dev \
@@ -36,7 +35,6 @@ RUN sudo apt-get install -y \
 # Setup tools installed into the home dir
 COPY prep-home.fish /prep-home.fish
 RUN chmod +x /prep-home.fish && chown ${USER} /prep-home.fish
-USER ${USER}
 RUN /prep-home.fish --ci
 
 # Install Verible for a better development experience
@@ -59,13 +57,7 @@ RUN git clone https://github.com/verilator/verilator.git /home/${USER}/verilator
 
 # Install a newer version of Node than ships with Debian
 RUN curl -fsSL https://deb.nodesource.com/setup_24.x | sudo -E bash -
-RUN sudo apt-get install -y nodejs
-
-# Reset to default
-ENV DEBIAN_FRONTEND=dialog
+RUN apt-get install -y nodejs
 
 # Set LANG to enable UTF-8 support
 ENV LANG=en_US.UTF-8
-
-# Enter the fish shell by default
-CMD ["fish", "/prep-home.fish"]
