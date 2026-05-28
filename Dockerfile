@@ -34,14 +34,14 @@ RUN chmod +x /prep-home.fish && chown ${USER} /prep-home.fish
 RUN /prep-home.fish --ci
 
 # Install Verible for a better development experience
-ARG VERIBLE_VERSION=v0.0-4051-g9fdb4057
+ARG VERIBLE_VERSION=v0.0-4053-g89d4d98a
 RUN curl -L -o verible.tar.gz https://github.com/chipsalliance/verible/releases/download/${VERIBLE_VERSION}/verible-${VERIBLE_VERSION}-linux-static-x86_64.tar.gz
 RUN tar -xzf verible.tar.gz
 RUN mv verible-${VERIBLE_VERSION}/bin/* /usr/local/bin/
 RUN rm -rf verible.tar.gz verible-${VERIBLE_VERSION}
 
 # Clone and build Verilator from source as to have the latest version
-ARG VERILATOR_VERSION=v5.044
+ARG VERILATOR_VERSION=v5.048
 RUN git clone https://github.com/verilator/verilator.git /home/${USER}/verilator && \
     cd /home/${USER}/verilator && \
     git checkout ${VERILATOR_VERSION} && \
