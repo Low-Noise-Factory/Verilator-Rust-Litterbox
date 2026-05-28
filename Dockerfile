@@ -55,5 +55,9 @@ RUN git clone https://github.com/verilator/verilator.git /home/${USER}/verilator
 RUN curl -fsSL https://deb.nodesource.com/setup_24.x | bash -
 RUN apt-get install -y nodejs
 
+# Install support for Git LFS
+RUN curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.deb.sh | bash
+RUN apt-get install git-lfs
+
 # Set LANG to enable UTF-8 support
 ENV LANG=en_US.UTF-8
