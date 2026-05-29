@@ -41,7 +41,7 @@ RUN mv verible-${VERIBLE_VERSION}/bin/* /usr/local/bin/
 RUN rm -rf verible.tar.gz verible-${VERIBLE_VERSION}
 
 # Clone and build Verilator from source as to have the latest version
-ARG VERILATOR_VERSION=v5.048
+ARG VERILATOR_VERSION=v5.044
 RUN git clone https://github.com/verilator/verilator.git /home/${USER}/verilator && \
     cd /home/${USER}/verilator && \
     git checkout ${VERILATOR_VERSION} && \
