@@ -28,6 +28,11 @@ cargo install cargo-cyclonedx --locked
 curl -fsSL https://get.pnpm.io/install.sh | sh -
 source /home/user/.config/fish/config.fish
 
+# We use osv-scanner to scan for vulnerabilities
+wget https://github.com/google/osv-scanner/releases/download/v2.5.0/osv-scanner_linux_arm64
+chmod +x osv-scanner_linux_arm64
+mv osv-scanner_linux_arm64 /home/user/.local/bin/osv-scanner
+
 # We do not need to install Zed when building a base image for CI use
 if not set -ql _flag_ci
     curl -f https://zed.dev/install.sh | sh
