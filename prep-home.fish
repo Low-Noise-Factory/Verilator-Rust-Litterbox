@@ -6,10 +6,10 @@ or return
 echo "Building home for the first time..."
 
 # We use osv-scanner to scan for vulnerabilities
-wget https://github.com/google/osv-scanner/releases/download/v2.5.0/osv-scanner_linux_arm64
-chmod +x osv-scanner_linux_arm64
+wget https://github.com/google/osv-scanner/releases/download/v2.5.0/osv-scanner_linux_amd64
+chmod +x osv-scanner_linux_amd64
 mkdir -p "$HOME/.local/bin"
-mv osv-scanner_linux_arm64 "$HOME/.local/bin/osv-scanner"
+mv osv-scanner_linux_amd64 "$HOME/.local/bin/osv-scanner"
 fish_add_path -U "$HOME/.local/bin"
 echo "Installed osv-scanner!"
 
