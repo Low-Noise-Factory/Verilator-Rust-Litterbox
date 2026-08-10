@@ -7,7 +7,6 @@ echo "Building home for the first time..."
 
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
 source "$HOME/.cargo/env.fish"
-fish_add_path -U "$HOME/.local/bin"
 
 # Nextest is very useful for advanced testing
 cargo install cargo-nextest --locked
@@ -33,6 +32,7 @@ wget https://github.com/google/osv-scanner/releases/download/v2.5.0/osv-scanner_
 chmod +x osv-scanner_linux_arm64
 mv osv-scanner_linux_arm64 /home/user/.local/bin/osv-scanner
 fish_add_path -U "$HOME/.local/bin"
+echo "Installed osv-scanner!"
 
 # We do not need to install Zed when building a base image for CI use
 if not set -ql _flag_ci
